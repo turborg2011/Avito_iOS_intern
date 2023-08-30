@@ -93,22 +93,18 @@ final class CollectionView: UIView, UICollectionViewDataSource {
     // MARK: - Layout
     override func layoutSubviews() {
         super.layoutSubviews()
-        collectionView.frame = bounds
+        collectionView.frame = self.safeAreaLayoutGuide.layoutFrame
     }
     
     // MARK: - Private methods
     func cell(indexPath: IndexPath, model: CollectionViewModel) -> UICollectionViewCell {
-        if !registerIds.contains(model.id) {
-            registerIds.insert(model.id)
-            
-            collectionView.register(
-                model.cellType,
-                forCellWithReuseIdentifier: model.id
-            )
-        }
+        collectionView.register(
+            model.cellType,
+            forCellWithReuseIdentifier: "\(model.self)"
+        )
         
         return collectionView.dequeueReusableCell(
-            withReuseIdentifier: model.id,
+            withReuseIdentifier: "\(model.self)",
             for: indexPath
         )
     }

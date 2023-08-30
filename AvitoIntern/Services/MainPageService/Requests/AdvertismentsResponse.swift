@@ -1,7 +1,7 @@
 import Foundation
 
 struct AdvertismentsResponse: Codable {
-    let advertisments: [Advertisment]
+    var advertisments: [Advertisment]
 
     init(from decoder: Decoder) throws {
         let container = try decoder.container()

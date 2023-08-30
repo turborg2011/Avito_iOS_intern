@@ -15,4 +15,3 @@ final class GenericCodingKey: CodingKey {
         self.value = value
     }
 }
-

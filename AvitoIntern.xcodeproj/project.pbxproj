@@ -384,9 +384,9 @@
 		46B1E0A72A9B31A000EF4276 /* MainPageService */ = {
 			isa = PBXGroup;
 			children = (
-				46B1E0A92A9B31BE00EF4276 /* Requests */,
 				46B1E0B22A9B34AD00EF4276 /* MainPageService.swift */,
 				46B1E0B42A9B34BA00EF4276 /* MainPageServiceImpl.swift */,
+				46B1E0A92A9B31BE00EF4276 /* Requests */,
 			);
 			path = MainPageService;
 			sourceTree = "<group>";

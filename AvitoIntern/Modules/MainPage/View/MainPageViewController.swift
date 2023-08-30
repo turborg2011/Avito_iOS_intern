@@ -67,6 +67,7 @@ final class MainViewController:
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
+        view.backgroundColor = .white
         loader.frame = view.bounds
         contentPlaceholder.frame = view.bounds
         collectionView.frame = view.bounds
