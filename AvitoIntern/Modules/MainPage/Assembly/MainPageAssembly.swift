@@ -17,11 +17,14 @@ import UIKit
             contentPlaceholderDisplayable: viewController
         )
         
+        let router = MainPageRouter(mainPageVC: viewController)
+        
         let presenter = MainPresenter(
             service: service,
             loaderDisplayable: loaderDisplayable,
             messageDisplayable: messageDisplayable,
-            contentPlaceholderDisplayable: contentPlaceholderDisplayable
+            contentPlaceholderDisplayable: contentPlaceholderDisplayable,
+            router: router
         )
         
         viewController.addDisposeBag(presenter)

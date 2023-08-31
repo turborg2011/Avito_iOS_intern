@@ -1,6 +1,6 @@
 import Foundation
 
-struct AdvertismentsResponse: Codable {
+struct AdvertismentsResponse: Decodable {
     var advertisments: [Advertisment]
 
     init(from decoder: Decoder) throws {

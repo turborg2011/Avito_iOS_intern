@@ -1,15 +1,15 @@
 import UIKit
 
-final class MainViewController:
+final class DetailPageViewController:
     BaseViewController,
-    MainViewViewInput,
+    DetailPageViewViewInput,
     LoaderDisplayable,
-    ContentPlaceholderDisplayable
-{
+    ContentPlaceholderDisplayable {
+    
     // MARK: - Subviews
     private let loader = Loader()
-    private let collectionView = CollectionView()
     private let contentPlaceholder = ContentPlaceholder()
+    private let detailView = DetailView()
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -17,34 +17,31 @@ final class MainViewController:
         
         view.addSubview(loader)
         view.addSubview(contentPlaceholder)
-        view.addSubview(collectionView)
+        view.addSubview(detailView)
     }
     
     // MARK: - MainViewViewInput
     var onTopRefresh: (() -> ())? {
-        get { collectionView.onTopRefresh }
-        set { collectionView.onTopRefresh = newValue }
+        get { detailView.onTopRefresh }
+        set { detailView.onTopRefresh = newValue }
     }
-    
-    var onCellTap: ((_ id: String) -> ())? {
-        get { collectionView.onCellTap }
-        set { collectionView.onCellTap = newValue }
-    }
-    
+
     func setTitle(_ title: String) {
         self.title = title
     }
     
-    func display(models: [CollectionViewModel]) {
-        collectionView.display(models: models)
+    func display(model: DetailViewModelAdvertisement) {
+        detailView.display(model: model)
     }
     
     func endRefreshing() {
-        collectionView.endRefreshing()
+        detailView.endRefreshing()
     }
     
     // MARK: - LoaderDisplayable
     func showLoader() {
+        print("SHOW LOADER")
+        
         loader.isHidden = false
         loader.start()
         view.bringSubviewToFront(loader)
@@ -73,8 +70,18 @@ final class MainViewController:
         super.viewWillLayoutSubviews()
         
         view.backgroundColor = .white
+        
         loader.frame = view.bounds
         contentPlaceholder.frame = view.bounds
-        collectionView.frame = view.bounds
+        detailView.frame = view.bounds
+        
+        detailView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            detailView.topAnchor.constraint(equalTo: self.view.topAnchor),
+            detailView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            detailView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            detailView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
+        ])
     }
 }

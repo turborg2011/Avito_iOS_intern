@@ -15,18 +15,21 @@ final class MainPresenter {
     private let loaderDisplayable: LoaderDisplayable
     private let messageDisplayable: MessageDisplayable
     private let contentPlaceholderDisplayable: ContentPlaceholderDisplayable
+    private let router: MainPageRouter
     
     // MARK: - Init
     init(
         service: MainPageService,
         loaderDisplayable: LoaderDisplayable,
         messageDisplayable: MessageDisplayable,
-        contentPlaceholderDisplayable: ContentPlaceholderDisplayable
+        contentPlaceholderDisplayable: ContentPlaceholderDisplayable,
+        router: MainPageRouter
     ) {
         self.service = service
         self.loaderDisplayable = loaderDisplayable
         self.messageDisplayable = messageDisplayable
         self.contentPlaceholderDisplayable = contentPlaceholderDisplayable
+        self.router = router
     }
     
     // MARK: - SetUp
@@ -35,8 +38,21 @@ final class MainPresenter {
             self?.proceedToLoadAdvertisments(isRefreshing: true)
         }
         
+        view?.onCellTap = { [weak self] (id: String) in
+            print("ON CELL TAP WORKED")
+            self?.pushDetailVC(id: id)
+        }
+        
         view?.onViewDidLoad = { [weak self] in
             self?.proceedToLoadAdvertisments()
+        }
+    }
+    
+    // MARK: - Push detail VC
+    private func pushDetailVC(id: String) {
+        Task {
+            print("PUSH WORKED")
+            await self.router.pushDetailVC(id: id)
         }
     }
 
@@ -61,8 +77,7 @@ final class MainPresenter {
             await handleAdvertismentsLoading(error, isRefreshing: isRefreshing)
         }
         
-        
-        
+
         await view?.endRefreshing()
     }
     

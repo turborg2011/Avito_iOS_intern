@@ -4,6 +4,7 @@ final class CollectionView: UIView, UICollectionViewDataSource {
     
     // MARK: - Callbacks
     var onTopRefresh: (() -> ())?
+    var onCellTap: ((_ id: String) -> ())?
     
     // MARK: - Data
     private var models: [CollectionViewModel] = []
@@ -42,7 +43,10 @@ final class CollectionView: UIView, UICollectionViewDataSource {
         
         addSubview(collectionView)
         collectionView.addSubview(refreshControl)
-        //collectionView.delegate = self
+        
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        
         setUpContent()
     }
     
@@ -52,9 +56,7 @@ final class CollectionView: UIView, UICollectionViewDataSource {
     
     // MARK: - SetUp
     private func setUpContent() {
-        collectionView.dataSource = self
         
-        collectionView.allowsSelection = false
         collectionView.backgroundColor = Spec.backgroundColor
         
         refreshControl.addTarget(self, action: #selector(onTopRefresh(_:)), for: .valueChanged)
@@ -113,6 +115,14 @@ final class CollectionView: UIView, UICollectionViewDataSource {
         onTopRefresh?()
     }
     
+}
+
+extension CollectionView: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("TAPPED ON CELL num = \(indexPath.item)")
+        let id = models[indexPath.item].id
+        onCellTap?(id)
+    }
 }
 
 //// MARK: - UICollectionViewDelegateFlowLayout

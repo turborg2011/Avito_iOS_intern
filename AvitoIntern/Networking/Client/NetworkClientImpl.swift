@@ -1,12 +1,12 @@
 import Foundation
 
-final class NetworkClientImpl: NetworkClient {
+final class NetworkClientImpl: NSObject, NetworkClient {
     
     // MARK: - Properties
     private let urlSession: URLSession = URLSession(configuration: .default)
     
+    
     // MARK: - Dependencies
-    //private let userDefaults: UserDefaults
     private let requestBuilder: RequestBuilder
     
     // MARK: - Init
@@ -14,7 +14,6 @@ final class NetworkClientImpl: NetworkClient {
         //userDefaults: UserDefaults = UserDefaults.standard,
         requestBuilder: RequestBuilder = RequestBuilderImpl()
     ) {
-        //self.userDefaults = userDefaults
         self.requestBuilder = requestBuilder
     }
     
@@ -42,6 +41,7 @@ final class NetworkClientImpl: NetworkClient {
             guard let url = URL(string: url) else {
                 return .failure(.networkError)
             }
+            
             let request = URLRequest(url: url)
             let (data, response) = try await urlSession.data(for: request)
             return .success(data)
