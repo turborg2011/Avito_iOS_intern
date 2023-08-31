@@ -4,6 +4,5 @@
 
     func setTitle(_ title: String)
     func display(model: DetailViewModelAdvertisement)
-    func endRefreshing()
 }
 

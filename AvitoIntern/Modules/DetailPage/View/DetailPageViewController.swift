@@ -34,10 +34,6 @@ final class DetailPageViewController:
         detailView.display(model: model)
     }
     
-    func endRefreshing() {
-        detailView.endRefreshing()
-    }
-    
     // MARK: - LoaderDisplayable
     func showLoader() {
         loader.isHidden = false

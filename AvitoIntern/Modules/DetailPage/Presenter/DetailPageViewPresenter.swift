@@ -60,7 +60,6 @@ final class DetailPageViewPresenter {
         case let .failure(error):
             await handleAdvertisementLoading(error, isRefreshing: isRefreshing)
         }
-        await view?.endRefreshing()
     }
     
     private func handleAdvertisementLoading(_ response: AdvertisementResponse, isRefreshing: Bool = false) async {
@@ -78,7 +77,6 @@ final class DetailPageViewPresenter {
                                         phone_number: response.advertisement.phone_number,
                                         address: response.advertisement.address)
         
-        await view?.endRefreshing()
         await loaderDisplayable?.hideLoader()
         await view?.display(model: model)
     }

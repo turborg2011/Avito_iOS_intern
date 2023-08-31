@@ -12,14 +12,11 @@ final class CollectionView: UIView, UICollectionViewDataSource {
     
     let layout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
-        let insetLeft: CGFloat = 6.0
-        let insetRight: CGFloat = 6.0
-        layout.sectionInset = UIEdgeInsets(top: 10,
-                                           left: insetLeft,
-                                           bottom: 5.0,
-                                           right: insetRight)
+        let insetLeft: CGFloat = Spec.lefRightInsets
+        let insetRight: CGFloat = Spec.lefRightInsets
+        layout.sectionInset = Spec.sectionInset
         let itemWidth = UIScreen.main.bounds.width / 2 - (insetLeft + insetRight)
-        layout.itemSize = CGSize(width: itemWidth, height: 300.0)
+        layout.itemSize = CGSize(width: itemWidth, height: Spec.itemHeight)
         return layout
       }()
     
@@ -120,4 +117,11 @@ extension CollectionView: UICollectionViewDelegate {
 fileprivate enum Spec {
     static let backgroundColor = UIColor.white
     static let cornerRadius: CGFloat = 30
+    
+    static let lefRightInsets: CGFloat = 6
+    static let sectionInset = UIEdgeInsets(top: 10,
+                                           left: lefRightInsets,
+                                           bottom: 5.0,
+                                           right: lefRightInsets)
+    static let itemHeight: CGFloat = 300
 }

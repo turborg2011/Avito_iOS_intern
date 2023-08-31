@@ -48,10 +48,6 @@ final class DetailView: UIView {
         address.text = "Адрес: \(model.address)"
     }
     
-    func endRefreshing() {
-        //refreshControl.endRefreshing()
-    }
-    
     // MARK: - Layout
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -97,13 +93,16 @@ final class DetailView: UIView {
         phoneNumber.font = Spec.regularFont
         address.font = Spec.regularFont
         
+        // Здесь переделать в UIStackView:
+        // на него constraint не ставятся почему-то и утечка памяти
+        
         NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 15),
-            imageView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 10),
-            imageView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -10),
-            imageView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -400),
+            imageView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: Spec.imageTopOfset),
+            imageView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: Spec.regularOfset),
+            imageView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: Spec.regularInset),
+            imageView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: Spec.imageBottomInset),
             
-            titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor),
+            titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: Spec.titleOfset),
             titleLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: Spec.regularOfset),
             titleLabel.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: Spec.regularInset),
             
@@ -144,8 +143,11 @@ final class DetailView: UIView {
 fileprivate enum Spec {
     static let imageCornerRadius: CGFloat = 15
     
+    static let titleOfset: CGFloat = 10
     static let regularOfset: CGFloat = 10
     static let regularInset: CGFloat = -10
+    static let imageTopOfset: CGFloat = 15
+    static let imageBottomInset: CGFloat = -400
     
     static let descHeight: CGFloat = 70
     

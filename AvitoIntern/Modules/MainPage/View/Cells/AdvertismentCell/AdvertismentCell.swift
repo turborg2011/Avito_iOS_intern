@@ -74,32 +74,32 @@ final class AdvertismentCell: UICollectionViewCell, CollectionViewCellInput {
         createdDateLabel.font = Spec.createDateFont
         
         NSLayoutConstraint.activate([
-            adImage.topAnchor.constraint(equalTo: contentView.layoutMarginsGuide.topAnchor, constant: 0),
-            adImage.leadingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor, constant: 0),
-            adImage.trailingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor, constant: 0),
-            adImage.bottomAnchor.constraint(equalTo: contentView.layoutMarginsGuide.bottomAnchor, constant: -100),
+            adImage.topAnchor.constraint(equalTo: contentView.layoutMarginsGuide.topAnchor),
+            adImage.leadingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor),
+            adImage.trailingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor),
+            adImage.bottomAnchor.constraint(equalTo: contentView.layoutMarginsGuide.bottomAnchor, constant: Spec.imageBottomInset),
             
-            backGroundInfoView.topAnchor.constraint(equalTo: adImage.bottomAnchor, constant: 5),
+            backGroundInfoView.topAnchor.constraint(equalTo: adImage.bottomAnchor, constant: Spec.regularInset),
             backGroundInfoView.leadingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor),
             backGroundInfoView.trailingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor),
             backGroundInfoView.bottomAnchor.constraint(equalTo: contentView.layoutMarginsGuide.bottomAnchor),
             
-            title.topAnchor.constraint(equalTo: backGroundInfoView.topAnchor, constant: 5),
-            title.leadingAnchor.constraint(equalTo: backGroundInfoView.leadingAnchor, constant: 5),
-            title.trailingAnchor.constraint(equalTo: backGroundInfoView.trailingAnchor, constant: -5),
+            title.topAnchor.constraint(equalTo: backGroundInfoView.topAnchor, constant: Spec.regularInset),
+            title.leadingAnchor.constraint(equalTo: backGroundInfoView.leadingAnchor, constant: Spec.regularInset),
+            title.trailingAnchor.constraint(equalTo: backGroundInfoView.trailingAnchor, constant: -Spec.regularInset),
             
-            price.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 5),
-            price.leadingAnchor.constraint(equalTo: backGroundInfoView.leadingAnchor, constant: 5),
-            price.trailingAnchor.constraint(equalTo: backGroundInfoView.trailingAnchor, constant: -5),
+            price.topAnchor.constraint(equalTo: title.bottomAnchor, constant: Spec.regularInset),
+            price.leadingAnchor.constraint(equalTo: backGroundInfoView.leadingAnchor, constant: Spec.regularInset),
+            price.trailingAnchor.constraint(equalTo: backGroundInfoView.trailingAnchor, constant: -Spec.regularInset),
             
-            locationLabel.topAnchor.constraint(equalTo: price.bottomAnchor, constant: 5),
-            locationLabel.leadingAnchor.constraint(equalTo: backGroundInfoView.leadingAnchor, constant: 5),
-            locationLabel.trailingAnchor.constraint(equalTo: backGroundInfoView.trailingAnchor, constant: -5),
+            locationLabel.topAnchor.constraint(equalTo: price.bottomAnchor, constant: Spec.regularInset),
+            locationLabel.leadingAnchor.constraint(equalTo: backGroundInfoView.leadingAnchor, constant: Spec.regularInset),
+            locationLabel.trailingAnchor.constraint(equalTo: backGroundInfoView.trailingAnchor, constant: -Spec.regularInset),
             
-            createdDateLabel.topAnchor.constraint(equalTo: locationLabel.bottomAnchor, constant: 5),
-            createdDateLabel.leadingAnchor.constraint(equalTo: backGroundInfoView.leadingAnchor, constant: 5),
-            createdDateLabel.trailingAnchor.constraint(equalTo: backGroundInfoView.trailingAnchor, constant: -5),
-            createdDateLabel.bottomAnchor.constraint(equalTo: backGroundInfoView.bottomAnchor, constant: -5)
+            createdDateLabel.topAnchor.constraint(equalTo: locationLabel.bottomAnchor, constant: Spec.regularInset),
+            createdDateLabel.leadingAnchor.constraint(equalTo: backGroundInfoView.leadingAnchor, constant: Spec.regularInset),
+            createdDateLabel.trailingAnchor.constraint(equalTo: backGroundInfoView.trailingAnchor, constant: -Spec.regularInset),
+            createdDateLabel.bottomAnchor.constraint(equalTo: backGroundInfoView.bottomAnchor, constant: -Spec.regularInset)
             
         ])
     }
@@ -110,6 +110,9 @@ final class AdvertismentCell: UICollectionViewCell, CollectionViewCellInput {
 fileprivate enum Spec {
     static let cornerRadius: CGFloat = 10
     static let imageCornerRadius: CGFloat = 7
+    
+    static let imageBottomInset: CGFloat = -100
+    static let regularInset: CGFloat = 5
     
     static let titleFont = UIFont.systemFont(ofSize: 16.0, weight: .medium)
     static let priceFont = UIFont.systemFont(ofSize: 16.0, weight: .bold)
