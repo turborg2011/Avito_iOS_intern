@@ -39,7 +39,6 @@ final class MainPresenter {
         }
         
         view?.onCellTap = { [weak self] (id: String) in
-            print("ON CELL TAP WORKED")
             self?.pushDetailVC(id: id)
         }
         
@@ -51,7 +50,6 @@ final class MainPresenter {
     // MARK: - Push detail VC
     private func pushDetailVC(id: String) {
         Task {
-            print("PUSH WORKED")
             await self.router.pushDetailVC(id: id)
         }
     }
@@ -82,9 +80,7 @@ final class MainPresenter {
     }
     
     private func handleAdvertismentsLoading(_ response: AdvertismentsResponse, isRefreshing: Bool = false) async {
-        await view?.setTitle("Advertisments!!!!!!!")
-        
-        print("RESP AD COUNT === \(response.advertisments.count)")
+        await view?.setTitle("Объявления")
         
         let loaderDisplayable = isRefreshing ? nil : loaderDisplayable
         await loaderDisplayable?.showLoader()
@@ -99,7 +95,6 @@ final class MainPresenter {
                             price: advertisement.price,
                             location: advertisement.location,
                             image: self?.imageFromURL(url: advertisement.image_url, isRefreshing: isRefreshing),
-                            //image: nil,
                             created_date: advertisement.created_date
                         ),
                         cellType: AdvertismentCell.self
@@ -111,22 +106,6 @@ final class MainPresenter {
                 partialResult.append(model)
             }
         })
-        
-        print("MODEL COUNTS IS === \(models.count)")
-//        let models = response.advertisments.map {
-//            CollectionViewModel(
-//                id: $0.id,
-//                data: AdvertismentCellData(
-//                    id: $0.id,
-//                    title: $0.title,
-//                    price: $0.price,
-//                    location: $0.location,
-//                    image: await service.uiImageFromURL(url: $0.image_url),
-//                    created_date: $0.created_date
-//                ),
-//                cellType: AdvertismentCell.self
-//            )
-//        }
         
         await loaderDisplayable?.hideLoader()
         await view?.endRefreshing()
@@ -152,9 +131,6 @@ final class MainPresenter {
             return UIImage(data: data)
         case let .failure(error):
             return nil
-            //await handleAdvertismentsLoading(error, isRefreshing: isRefreshing)
         }
-        
-        //return nil
     }
 }

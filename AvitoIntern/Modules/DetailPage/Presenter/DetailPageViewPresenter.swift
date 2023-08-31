@@ -32,7 +32,6 @@ final class DetailPageViewPresenter {
     // MARK: - SetUp
     @MainActor private func setUpView() {
         view?.onTopRefresh = { [weak self] in
-            print("!!! WORKED ON TOP REFRESH")
             self?.proceedToLoadAdvertisement(isRefreshing: true)
         }
         
@@ -53,7 +52,6 @@ final class DetailPageViewPresenter {
         
         await loaderDisplayable?.showLoader()
         let result = await service.advertisement()
-        print("RESULT IS HERE")
         await loaderDisplayable?.hideLoader()
         
         switch result {
@@ -62,15 +60,10 @@ final class DetailPageViewPresenter {
         case let .failure(error):
             await handleAdvertisementLoading(error, isRefreshing: isRefreshing)
         }
-        //await loaderDisplayable?.hideLoader()
         await view?.endRefreshing()
     }
     
     private func handleAdvertisementLoading(_ response: AdvertisementResponse, isRefreshing: Bool = false) async {
-        
-        await view?.setTitle("Advertiseeement!!!!!!!")
-        
-        print("handleAdvertisementLoading worked")
         
         let loaderDisplayable = isRefreshing ? nil : loaderDisplayable
         await loaderDisplayable?.showLoader()
@@ -97,7 +90,6 @@ final class DetailPageViewPresenter {
         }
         
         await contentPlaceholderDisplayable.showPlaceholder(error: error) { [weak self] in
-            print("ERROR CONTENT PLACE HOLDR")
             self?.proceedToLoadAdvertisement()
         }
     }
@@ -110,9 +102,6 @@ final class DetailPageViewPresenter {
             return UIImage(data: data)
         case let .failure(error):
             return nil
-            //await handleAdvertismentsLoading(error, isRefreshing: isRefreshing)
         }
-        
-        //return nil
     }
 }

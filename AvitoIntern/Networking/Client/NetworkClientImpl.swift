@@ -11,7 +11,6 @@ final class NetworkClientImpl: NSObject, NetworkClient {
     
     // MARK: - Init
     init(
-        //userDefaults: UserDefaults = UserDefaults.standard,
         requestBuilder: RequestBuilder = RequestBuilderImpl()
     ) {
         self.requestBuilder = requestBuilder
@@ -48,7 +47,6 @@ final class NetworkClientImpl: NSObject, NetworkClient {
         } catch {
             switch (error as? URLError)?.code {
             case .some(.notConnectedToInternet):
-                print("CAAAATCH this ERROR in IMG handling!!!!")
                 return .failure(.noInternetConnection)
             case .some(.timedOut):
                 return .failure(.timeout)
@@ -70,12 +68,10 @@ final class NetworkClientImpl: NSObject, NetworkClient {
         } catch {
             switch (error as? URLError)?.code {
             case .some(.notConnectedToInternet):
-                print("CATCH INTER CONN")
                 return .failure(.noInternetConnection)
             case .some(.timedOut):
                 return .failure(.timeout)
             default:
-                print("CATCH NETWORK ERROR")
                 return .failure(.networkError)
             }
         }
@@ -87,17 +83,8 @@ final class NetworkClientImpl: NSObject, NetworkClient {
         responseConverter: Converter
     ) -> Result<Converter.Response, NetworkError> {
         if let response = responseConverter.decodeResponse(from: data) {
-            print("Decode response")
             return .success(response)
         }
-        print("Failll")
         return .failure(.parsingFailure)
     }
 }
-
-//// MARK: - Spec
-//fileprivate enum Spec {
-//    static func responseCacheKey(urlString: String) -> String {
-//        "ExpirationTimestamp_\(urlString)"
-//    }
-//}

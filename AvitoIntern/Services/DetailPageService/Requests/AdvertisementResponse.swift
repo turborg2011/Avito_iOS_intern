@@ -5,9 +5,7 @@ struct AdvertisementResponse: Decodable {
 
     init(from decoder: Decoder) throws {
         let container = try decoder.container()
-        
-        print("DECODE SUCCESS")
-        
+
         advertisement = DetailAdvertisement(id: try container.decode(key: "id"),
                                             title: try container.decode(key: "title"),
                                             price: try container.decode(key: "price"),

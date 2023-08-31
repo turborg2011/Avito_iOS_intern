@@ -21,9 +21,7 @@ import UIKit
         
         viewController.addDisposeBag(presenter)
         presenter.view = viewController
-        
-        print("Deyail page assembly worked")
-        
+
         return viewController
     }
 }

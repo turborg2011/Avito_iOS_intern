@@ -40,8 +40,6 @@ final class DetailPageViewController:
     
     // MARK: - LoaderDisplayable
     func showLoader() {
-        print("SHOW LOADER")
-        
         loader.isHidden = false
         loader.start()
         view.bringSubviewToFront(loader)

@@ -10,14 +10,6 @@ final class CollectionView: UIView, UICollectionViewDataSource {
     private var models: [CollectionViewModel] = []
     private var registerIds: Set<String> = []
     
-//    let layoutCV: UICollectionViewFlowLayout = {
-//        let layout = UICollectionViewFlowLayout()
-//        layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10)
-//        layout.itemSize = CGSize(width: 60, height: 60)
-//        layout.minimumInteritemSpacing = 100
-//        return layout
-//    }()
-    
     let layout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
         let insetLeft: CGFloat = 6.0
@@ -96,6 +88,7 @@ final class CollectionView: UIView, UICollectionViewDataSource {
     override func layoutSubviews() {
         super.layoutSubviews()
         collectionView.frame = self.safeAreaLayoutGuide.layoutFrame
+        collectionView.layer.cornerRadius = Spec.cornerRadius
     }
     
     // MARK: - Private methods
@@ -119,57 +112,12 @@ final class CollectionView: UIView, UICollectionViewDataSource {
 
 extension CollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("TAPPED ON CELL num = \(indexPath.item)")
         let id = models[indexPath.item].id
         onCellTap?(id)
     }
 }
 
-//// MARK: - UICollectionViewDelegateFlowLayout
-//private extension CollectionView {
-//    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-//        return CGSize(width: (self.frame.width / 2) - 2, height: (self.frame.width / 2) - 2)
-//    }
-//}
-
-//extension CollectionView: UICollectionViewDelegateFlowLayout {
-//
-//    func collectionView(
-//        _ collectionView: UICollectionView,
-//        layout collectionViewLayout: UICollectionViewLayout,
-//        sizeForItemAt indexPath: IndexPath
-//    ) -> CGSize {
-//        .init(
-//            width: collectionView.bounds.size.width / 2 - 16,
-//            height: 120
-//        )
-//    }
-//    func collectionView(
-//        _ collectionView: UICollectionView,
-//        layout collectionViewLayout: UICollectionViewLayout,
-//        minimumLineSpacingForSectionAt section: Int
-//    ) -> CGFloat {
-//        8
-//    }
-//
-//    func collectionView(
-//        _ collectionView: UICollectionView,
-//        layout collectionViewLayout: UICollectionViewLayout,
-//        minimumInteritemSpacingForSectionAt section: Int
-//    ) -> CGFloat {
-//        8
-//    }
-//
-//    func collectionView(
-//        _ collectionView: UICollectionView,
-//        layout collectionViewLayout: UICollectionViewLayout,
-//        insetForSectionAt section: Int
-//    ) -> UIEdgeInsets {
-//        .init(top: 8, left: 8, bottom: 8, right: 8)
-//    }
-//}
-
-// MARK: - Spec
 fileprivate enum Spec {
     static let backgroundColor = UIColor.white
+    static let cornerRadius: CGFloat = 30
 }
